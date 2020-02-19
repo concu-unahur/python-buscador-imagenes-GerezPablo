@@ -1,11 +1,8 @@
 import logging
 from api import PixabayAPI
+import threading
 
 logging.basicConfig(format='%(asctime)s.%(msecs)03d [%(threadName)s] - %(message)s', datefmt='%H:%M:%S', level=logging.INFO)
-
-
-
-
 
 
 carpeta_imagenes = './imagenes'
@@ -17,8 +14,7 @@ urls = api.buscar_imagenes(query, cant)
 logging.info(f'Buscando imagenes de {query}...')
 
 for u in urls:
-  t = PixabayAPI('15310263-3c077b8973067ba768708060a', carpeta_imagenes)
+  t = threading.Thread(target = api.descargar_imagen, args=[u])
   logging.info(f'Descargando {u}')
-  # t.run(u)
-  t.(args=[u])
+  t.start()
 

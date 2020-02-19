@@ -1,7 +1,6 @@
 import requests
 import json
 import os
-import threading
 
 class PixabayAPI():
   def __init__(self, key, carpeta_imagenes):
@@ -39,10 +38,7 @@ class PixabayAPI():
     # jsonResponse.hits.map { x => x.largeImageURL }
     #
     # Pero en Python las funciones de listas son funciones globales y no métodos, así que queda así:
-    return map(lambda h: h['largeImageURL'], jsonResponse['hits'])
-  
-  def run(self, url):
-        self.descargar_imagen(url)
+    return map(lambda h: h['largeImageURL'], jsonResponse['hits'])  
 
   def descargar_imagen(self, url):
     # Bajo la imagen (una chorrera de bytes)
